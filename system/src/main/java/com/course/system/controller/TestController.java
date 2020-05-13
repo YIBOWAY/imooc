@@ -1,8 +1,8 @@
 package com.course.system.controller;
 
 
-import com.course.system.service.TestService;
-import com.course.system.domain.mybatis_study;
+import com.course.server.service.TestService;
+import com.course.server.domain.mybatis_study;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
