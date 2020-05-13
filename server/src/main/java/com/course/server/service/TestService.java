@@ -1,6 +1,6 @@
 package com.course.server.service;
 
-import com.course.server.domain.mybatis_study;
+import com.course.server.domain.Test;
 import com.course.server.mapper.TestMapper;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class TestService {
     @Resource
     private TestMapper testMapper;
-    public List<mybatis_study> list(){
+    public List<Test> list(){
         return testMapper.list();
     }
 }
