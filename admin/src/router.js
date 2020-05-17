@@ -24,7 +24,7 @@ export default new Router({
             path:'welcome',//子路由里不能加'/'
             component:Welcome,
         },{
-            path: 'chapter',
+            path: 'business/chapter',
             component: Chapter,
         }]
     }]
