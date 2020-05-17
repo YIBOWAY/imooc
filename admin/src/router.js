@@ -18,13 +18,16 @@ export default new Router({
         path: '/login',
         component:Login
     },{
-        path: '/admin',
+        path: '/',
+        name:'admin',
         component:Admin,
         children:[{         //子组件，对应子页面
             path:'welcome',//子路由里不能加'/'
+            name:'welcome',
             component:Welcome,
         },{
             path: 'business/chapter',
+            name:'business/chapter',
             component: Chapter,
         }]
     }]
