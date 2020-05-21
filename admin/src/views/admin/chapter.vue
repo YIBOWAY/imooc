@@ -79,7 +79,7 @@
 <script>
     export default {
         name: 'chapter',
-        data:function(){
+        data:function(){//双向绑定数据，前后端均可调用
             return {
                 chapters:[]
             }

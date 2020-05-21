@@ -8,6 +8,7 @@ create table chapter(
 
 insert into chapter (id, course_id, name) values ('00000000','00000000','测试大章一');
 insert into chapter (id, course_id, name) values ('00000001','00000000','测试大章二');
+insert into chapter (id, course_id, name) values ('00000002','00000000','测试大章三');
 
 
 
