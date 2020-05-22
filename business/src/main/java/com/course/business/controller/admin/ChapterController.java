@@ -27,4 +27,10 @@ public class ChapterController {
         chapterService.list(pageDto);
         return pageDto;
     }
+    @RequestMapping("/save")
+    public ChapterDto list(@RequestBody ChapterDto chapterDto){//加上@RequestBody，把表单接受方式改为流接收方式
+        LOG.info("pageDto:{}",chapterDto);
+        chapterService.save(chapterDto);
+        return chapterDto;
+    }
 }
