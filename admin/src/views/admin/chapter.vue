@@ -33,20 +33,11 @@
 
           <td>
             <div class="hidden-sm hidden-xs btn-group">
-              <button class="btn btn-xs btn-success">
-                <i class="ace-icon fa fa-check bigger-120"></i>
-              </button>
-
-              <button class="btn btn-xs btn-info">
+              <button v-on:click="edit(chapter)" class="btn btn-xs btn-info">
                 <i class="ace-icon fa fa-pencil bigger-120"></i>
               </button>
-
               <button class="btn btn-xs btn-danger">
                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
-              </button>
-
-              <button class="btn btn-xs btn-warning">
-                <i class="ace-icon fa fa-flag bigger-120"></i>
               </button>
             </div>
 
@@ -82,7 +73,7 @@
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> <!--响应式隐藏按钮-->
           </td>
         </tr>
         </tbody>
@@ -140,6 +131,12 @@
         methods:{
             add(){
                 let _this = this;
+                _this.chapter = {};
+                $("#form-modal").modal("show")//用于弹出或关闭模态框
+            },
+            edit(chapter){
+                let _this = this;
+                _this.chapter = $.extend({},chapter);//引入jQuery的extend赋值方法，解决Vue的数据绑定问题
                 $("#form-modal").modal("show")//用于弹出或关闭模态框
             },
 

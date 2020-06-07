@@ -5,10 +5,12 @@ import com.course.server.domain.ChapterExample;
 import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
 import com.course.server.mapper.ChapterMapper;
+import com.course.server.util.CopyUtil;
 import com.course.server.util.UuidUtil;
 import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.util.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ public class ChapterService {
         PageHelper.startPage(pageDto.getPage(),pageDto.getSize());//执行的第一个select语句会进行分页
         ChapterExample chapterExample = new ChapterExample();
 //        chapterExample.createCriteria().andIdEqualTo("1");//sql中的where语句
-        chapterExample.setOrderByClause("id desc");//sql中的order by 语句
+//        chapterExample.setOrderByClause("id desc");//sql中的order by 语句
         List<Chapter> chapterList = chapterMapper.selectByExample(chapterExample);//select语句
         PageInfo<Chapter> pageInfo = new PageInfo<>(chapterList);
         pageDto.setTotal(pageInfo.getTotal());//得到总行数
@@ -41,10 +43,22 @@ public class ChapterService {
     }
 
     public void save(ChapterDto chapterDto){
-        chapterDto.setId(UuidUtil.getShortUuid());//生成UID
-        Chapter chapter = new Chapter();
-        BeanUtils.copyProperties(chapterDto,chapter);
+        Chapter chapter = CopyUtil.copy(chapterDto,Chapter.class);
+        if (StringUtil.isEmpty(chapterDto.getId())){
+          this.insert(chapter);
+        }else{
+            this.update(chapter);
+      }
+
+    }
+    private void insert(Chapter chapter){
+        chapter.setId(UuidUtil.getShortUuid());//生成UID
+
         chapterMapper.insert(chapter);
+
+    }
+    private void update(Chapter chapter){
+        chapterMapper.updateByPrimaryKey(chapter);
 
     }
 }
