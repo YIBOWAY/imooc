@@ -6,9 +6,7 @@ import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
 import com.course.server.service.ChapterService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +20,7 @@ public class ChapterController {
 
     @Resource
     private ChapterService chapterService;
-    @RequestMapping("/list")
+    @PostMapping("/list")
     public ResponseDto list(@RequestBody PageDto pageDto){//加上@RequestBody，把表单接受方式改为流接收方式
         LOG.info("pageDto:{}",pageDto);
         ResponseDto responseDto = new ResponseDto();
@@ -30,12 +28,19 @@ public class ChapterController {
         responseDto.setContent(pageDto);
         return responseDto;
     }
-    @RequestMapping("/save")
-    public ResponseDto list(@RequestBody ChapterDto chapterDto){//加上@RequestBody，把表单接受方式改为流接收方式
+    @PostMapping("/save")
+    public ResponseDto save(@RequestBody ChapterDto chapterDto){//加上@RequestBody，把表单接受方式改为流接收方式
         LOG.info("pageDto:{}",chapterDto);
         ResponseDto responseDto = new ResponseDto();
         chapterService.save(chapterDto);
         responseDto.setContent(chapterDto);
+        return responseDto;
+    }
+    @RequestMapping("/delete/{id}")
+    public ResponseDto save(@PathVariable String id){
+        LOG.info("id:{}",id);
+        ResponseDto responseDto = new ResponseDto();
+        chapterService.delete(id);
         return responseDto;
     }
 }
